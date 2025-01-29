@@ -10,19 +10,13 @@ public class Solution {
         dicts.Add('D',500);
         dicts.Add('M',1000);
 
-        char[] specChar = { 'I', 'X', 'C' };
+        //char[] specChar = { 'I', 'X', 'C' };
         int ret = 0;
-        for(int i = 0; i < strLen; i++){
-            int numToAdd = dicts[s[i]];
-            if(i != (strLen - 1) && specChar.Contains(s[i])){
-                if(dicts[s[i+1]] > dicts[s[i]]){
-                    numToAdd = dicts[s[i+1]] - dicts[s[i]];
-                    i++;
-                }
-            }
-            ret = ret + numToAdd;
+        for(int i = 0; i < strLen - 1; i++){
+            int current = dicts[s[i]];
+            ret += (dicts[s[i+1]] > current ? -1 : 1) * current;
         }
 
-        return ret;
+        return ret + dicts[s[strLen-1]];
     }
 }
